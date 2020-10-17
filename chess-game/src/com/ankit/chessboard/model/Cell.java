@@ -38,7 +38,7 @@ public class Cell {
 	 * @param stringifiedCell
 	 * @return Cell
 	 * */
-	public static Cell convertToBox(String stringifiedCell) {
+	public static Cell convertToCell(String stringifiedCell) {
 		int xPosition = Integer.parseInt(stringifiedCell.substring(1));
 		int x = 8 - xPosition;
 		char yPosition = stringifiedCell.charAt(0);
