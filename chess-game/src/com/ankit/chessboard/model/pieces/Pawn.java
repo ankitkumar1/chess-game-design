@@ -25,7 +25,7 @@ public class Pawn extends Piece{
 		int destinationY = destination.getyCord();
 		
 		// It will move only 1 step vertically forward.
-		if(currentY==destinationY && destinationX-currentX == 1) {
+		if(currentY==destinationY && currentX - destinationX == 1) {
 			return true;
 		}
 		return false;
