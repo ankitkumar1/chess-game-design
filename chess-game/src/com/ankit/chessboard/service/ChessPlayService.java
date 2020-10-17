@@ -33,7 +33,8 @@ public class ChessPlayService {
 
 		List<Cell> allPossibleMoves = this.deriveAllPossibleMoves(request.getPiece(), request.getCurrentPosition());
 		if(!allPossibleMoves.isEmpty()) {
-			return allPossibleMoves.stream().map(move -> move.stringifiedCell()).collect(Collectors.joining(","));
+			return allPossibleMoves.stream().map(move -> move.stringifiedCell()).collect(
+					Collectors.joining(", "));
 		}
 		return "No any possible moves!";
 	}

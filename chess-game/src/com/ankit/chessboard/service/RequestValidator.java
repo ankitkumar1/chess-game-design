@@ -3,10 +3,10 @@ package com.ankit.chessboard.service;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.ankit.chessboard.PieceFactory;
 import com.ankit.chessboard.constants.PieceTypeEnum;
 import com.ankit.chessboard.model.Cell;
 import com.ankit.chessboard.model.ConvertedRequest;
-import com.ankit.chessboard.model.pieces.King;
 import com.ankit.chessboard.model.pieces.Piece;
 
 /**
@@ -19,8 +19,9 @@ import com.ankit.chessboard.model.pieces.Piece;
  * */
 public class RequestValidator {
 
-	private final static String INVALID_INPUT_MESSAGE = "It must contain piece type and current position!";
-	private final static String INVALID_PIECE_MESSAGE = "Piece is not valid!";
+	private final static String EMPTY_INPUT = "ERROR! Input is empty. ";
+	private final static String INVALID_INPUT_MESSAGE = "ERROR! It must contain valid piece type and current position Eg. 'King D5'";
+	private final static String INVALID_PIECE_OR_CELL_MESSAGE = "ERROR! Piece Type must be one of these- King, Queen, Bishop, Horse, Rook, Pawn and cell no must be among A1..A8..H8.\n  Eg. 'King D5', 'Queen A6'";
 	
 	/**
 	 * Building this set with fixed set of pices. 
@@ -46,7 +47,7 @@ public class RequestValidator {
 		ConvertedRequest request = new ConvertedRequest();
 		// Check for valid input - 1st check.
 		if(typeAndPosition==null || typeAndPosition.isEmpty()) {
-			request.setErrorMessage("Input is empty. "+INVALID_INPUT_MESSAGE);
+			request.setErrorMessage(EMPTY_INPUT);
 			return request;
 		}
 		
@@ -58,14 +59,17 @@ public class RequestValidator {
 			return request;
 		}
 		
-		String pieceType = input[0];
+		String pieceTypeValue = input[0];
 		String stringifiedCell = input[1];
-		if(!validPieces.contains(pieceType) || !isValidPosition(stringifiedCell)) {
-			request.setErrorMessage(INVALID_PIECE_MESSAGE);
+		if(!validPieces.contains(pieceTypeValue) || !isValidPosition(stringifiedCell)) {
+			request.setErrorMessage(INVALID_PIECE_OR_CELL_MESSAGE);
 			return request;
 		}
 		Cell currentCell = Cell.convertToCell(stringifiedCell);
-		Piece piece = new King(currentCell);
+		
+		// Calling factory class for building instances of different piece based on input.
+		PieceFactory pieceFactory = new PieceFactory();
+		Piece piece = pieceFactory.buildPiece(pieceTypeValue, currentCell);
 		request.setCurrentPosition(currentCell);
 		request.setPiece(piece);
 		

@@ -15,9 +15,9 @@ public enum PieceTypeEnum {
 	ROOK("Rook"),
 	PAWN("Pawn");
 
-	private final String value;
+	String value;
 
-	private PieceTypeEnum(String value) {
+	PieceTypeEnum(String value) {
 		this.value = value;
 	}
 
