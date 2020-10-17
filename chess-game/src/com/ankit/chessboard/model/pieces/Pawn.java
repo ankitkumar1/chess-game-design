@@ -4,15 +4,15 @@ import com.ankit.chessboard.model.Cell;
 
 /**
  * Its a subclass of Piece
- * King- Can move only 1 step at a time in all 8 directions 
- * (horizontal, vertical and diagonal)
+ * Pawn- Can move only 1 step at a time, in the forward direction, vertically.
+ * @Note Since, boad is empty. it can move only in forward direction, vertically
  * 
  * @version 1.0
  * @author Ankit
  * */
-public class King extends Piece{
+public class Pawn extends Piece{
 
-	public King(Cell currentPosition) {
+	public Pawn(Cell currentPosition) {
 		super(currentPosition);
 	}
 
@@ -24,14 +24,8 @@ public class King extends Piece{
 		int destinationX = destination.getxCord();
 		int destinationY = destination.getyCord();
 		
-		int xDiff = Math.abs(currentX - destinationX);
-		int yDiff = Math.abs(currentY - destinationY);
-		// Check for horizontal and vertical up/down
-		if((xDiff==0 && yDiff==1) || (xDiff==1 && yDiff==0)) {
-			return true;
-		}
-		// Check for diagonals
-		if(xDiff == yDiff && xDiff==1) {
+		// It will move only 1 step vertically forward.
+		if(currentY==destinationY && destinationX-currentX == 1) {
 			return true;
 		}
 		return false;

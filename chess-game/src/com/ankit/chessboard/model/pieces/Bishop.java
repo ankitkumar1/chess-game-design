@@ -4,15 +4,14 @@ import com.ankit.chessboard.model.Cell;
 
 /**
  * Its a subclass of Piece
- * King- Can move only 1 step at a time in all 8 directions 
- * (horizontal, vertical and diagonal)
+ * Bishop- Can move across the board only diagonally.
  * 
  * @version 1.0
  * @author Ankit
  * */
-public class King extends Piece{
+public class Bishop extends Piece{
 
-	public King(Cell currentPosition) {
+	public Bishop(Cell currentPosition) {
 		super(currentPosition);
 	}
 
@@ -26,15 +25,9 @@ public class King extends Piece{
 		
 		int xDiff = Math.abs(currentX - destinationX);
 		int yDiff = Math.abs(currentY - destinationY);
-		// Check for horizontal and vertical up/down
-		if((xDiff==0 && yDiff==1) || (xDiff==1 && yDiff==0)) {
-			return true;
-		}
-		// Check for diagonals
-		if(xDiff == yDiff && xDiff==1) {
-			return true;
-		}
-		return false;
+		
+		// Moves only diagonally
+		return xDiff == yDiff && xDiff>0;
 	}
 
 }
