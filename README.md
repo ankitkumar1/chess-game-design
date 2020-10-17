@@ -26,6 +26,7 @@ Piece.java (abstract and super class for all the pice types)
       ---| Horse.java
       ---| Rook.java
       ---| Pawn.java
+
 Cell.java  -> Wrapper around x and y coordinate value.
 ConvertedRequest.java -> Class to store converted request
 # Service classes
@@ -34,5 +35,9 @@ ConvertedRequest.java -> Class to store converted request
 # Factory class
         PieceFactory.java -> to create Piece instance based on input type
 # Test class
-   Will be added soon.
+   ChessPlayServiceTest.java
+
+Additional API/jars:
+ - Add junit5 libraries in the classpath
+
 
