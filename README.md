@@ -16,3 +16,23 @@ simulate the movement of each unique chess piece on an empty chessboard.
 # Setup
 Step1: Download the zip and import the java project in eclipse.
 
+# Bootstrap class
+        BootStrap.java
+# Model Classes
+Piece.java (abstract and super class for all the pice types)
+      ---| King.java
+      ---| Queen.java
+      ---| Bishop.java
+      ---| Horse.java
+      ---| Rook.java
+      ---| Pawn.java
+Cell.java  -> Wrapper around x and y coordinate value.
+ConvertedRequest.java -> Class to store converted request
+# Service classes
+  ChessPlayService.java
+  RequestValidator.java
+# Factory class
+        PieceFactory.java -> to create Piece instance based on input type
+# Test class
+   Will be added soon.
+
