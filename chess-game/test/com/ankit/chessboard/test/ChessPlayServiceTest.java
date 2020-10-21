@@ -1,4 +1,4 @@
-package com.ankit.chessboard;
+package com.ankit.chessboard.test;
 
 import java.util.Arrays;
 import java.util.HashSet;
