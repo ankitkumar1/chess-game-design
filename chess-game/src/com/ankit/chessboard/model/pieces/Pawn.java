@@ -1,5 +1,6 @@
 package com.ankit.chessboard.model.pieces;
 
+import com.ankit.chessboard.constants.CoreConstants;
 import com.ankit.chessboard.model.Cell;
 
 /**
@@ -18,14 +19,14 @@ public class Pawn extends Piece{
 
 	@Override
 	public boolean canMove(Cell destination) {
-		int currentX = currentPosition.getxCord();
-		int currentY = currentPosition.getyCord();
+		int currentX = currentPosition.getRow();
+		int currentY = currentPosition.getCol();
 		
-		int destinationX = destination.getxCord();
-		int destinationY = destination.getyCord();
+		int destinationX = destination.getRow();
+		int destinationY = destination.getCol();
 		
 		// It will move only 1 step vertically forward.
-		if(currentY==destinationY && currentX - destinationX == 1) {
+		if(currentY==destinationY && currentX - destinationX == CoreConstants.Integer.ONE) {
 			return true;
 		}
 		return false;

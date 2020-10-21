@@ -1,5 +1,6 @@
 package com.ankit.chessboard.model.pieces;
 
+import com.ankit.chessboard.constants.CoreConstants;
 import com.ankit.chessboard.model.Cell;
 
 /**
@@ -17,16 +18,17 @@ public class Horse extends Piece{
 
 	@Override
 	public boolean canMove(Cell destination) {
-		int currentX = currentPosition.getxCord();
-		int currentY = currentPosition.getyCord();
+		int currentX = currentPosition.getRow();
+		int currentY = currentPosition.getCol();
 		
-		int destinationX = destination.getxCord();
-		int destinationY = destination.getyCord();
+		int destinationX = destination.getRow();
+		int destinationY = destination.getCol();
 		
 		int xDiff = Math.abs(currentX - destinationX);
 		int yDiff = Math.abs(currentY - destinationY);
 		
 		// Moves 2.5
-		return (xDiff==1 && yDiff==2) || (xDiff==2 && yDiff==1);
+		return (xDiff==CoreConstants.Integer.ONE && yDiff==CoreConstants.Integer.TWO) || 
+				(xDiff==CoreConstants.Integer.TWO && yDiff==CoreConstants.Integer.ONE);
 	}
 }

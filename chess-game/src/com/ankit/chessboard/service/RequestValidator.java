@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.ankit.chessboard.PieceFactory;
+import com.ankit.chessboard.constants.CoreConstants;
+import com.ankit.chessboard.constants.ErrorMessage;
 import com.ankit.chessboard.constants.PieceTypeEnum;
 import com.ankit.chessboard.model.Cell;
 import com.ankit.chessboard.model.ConvertedRequest;
@@ -19,10 +21,6 @@ import com.ankit.chessboard.model.pieces.Piece;
  * */
 public class RequestValidator {
 
-	private final static String EMPTY_INPUT = "ERROR! Input is empty. ";
-	private final static String INVALID_INPUT_MESSAGE = "ERROR! It must contain valid piece type and current position Eg. 'King D5'";
-	private final static String INVALID_PIECE_OR_CELL_MESSAGE = "ERROR! Piece Type must be one of these- King, Queen, Bishop, Horse, Rook, Pawn and cell no must be among A1..A8..H8.\n  Eg. 'King D5', 'Queen A6'";
-	
 	/**
 	 * Building this set with fixed set of pices. 
 	 * Piece coming in input must be either of these.
@@ -47,22 +45,22 @@ public class RequestValidator {
 		ConvertedRequest request = new ConvertedRequest();
 		// Check for valid input - 1st check.
 		if(typeAndPosition==null || typeAndPosition.isEmpty()) {
-			request.setErrorMessage(EMPTY_INPUT);
+			request.setErrorMessage(ErrorMessage.EMPTY_INPUT);
 			return request;
 		}
 		
-		String[] input = typeAndPosition.split(" ");
+		String[] input = typeAndPosition.split(CoreConstants.SPACE);
 		// Check for validity again- 2nd check
 		
-		if(input.length!=2){
-			request.setErrorMessage(INVALID_INPUT_MESSAGE);
+		if(input.length != CoreConstants.Integer.TWO){
+			request.setErrorMessage(ErrorMessage.INVALID_INPUT_MESSAGE);
 			return request;
 		}
 		
-		String pieceTypeValue = input[0];
-		String stringifiedCell = input[1];
+		String pieceTypeValue = input[CoreConstants.Integer.ZERO];
+		String stringifiedCell = input[CoreConstants.Integer.ONE];
 		if(!validPieces.contains(pieceTypeValue) || !isValidPosition(stringifiedCell)) {
-			request.setErrorMessage(INVALID_PIECE_OR_CELL_MESSAGE);
+			request.setErrorMessage(ErrorMessage.INVALID_PIECE_OR_CELL_MESSAGE);
 			return request;
 		}
 		Cell currentCell = Cell.convertToCell(stringifiedCell);
@@ -85,18 +83,19 @@ public class RequestValidator {
 	 * @return boolean
 	 * */
 	private boolean isValidPosition(String currentPositionStringified) {
-		if(currentPositionStringified.isEmpty() && currentPositionStringified.length()!=2)
+		if(currentPositionStringified.isEmpty() && 
+				currentPositionStringified.length()!=CoreConstants.Integer.TWO)
 			return false;
 		
-		char yPosition = currentPositionStringified.charAt(0);
-		if(yPosition<'A' || yPosition>'H') {
+		char column = currentPositionStringified.charAt(CoreConstants.Integer.ZERO);
+		if(column<CoreConstants.Alphabet.A_CAPS || column>CoreConstants.Alphabet.H_CAPS) {
 			return false;
 		}
 		
-		String xPosition = currentPositionStringified.substring(1);
+		String rowNumString = currentPositionStringified.substring(CoreConstants.Integer.ONE);
 		try {
-			int x = Integer.parseInt(xPosition);
-			if(x<1 || x>8) {
+			int row = Integer.parseInt(rowNumString);
+			if(row<CoreConstants.Integer.ONE || row>CoreConstants.Integer.EIGHT) {
 				return false;
 			}
 		} catch (Exception e) {

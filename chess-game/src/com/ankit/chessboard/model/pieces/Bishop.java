@@ -1,5 +1,6 @@
 package com.ankit.chessboard.model.pieces;
 
+import com.ankit.chessboard.constants.CoreConstants;
 import com.ankit.chessboard.model.Cell;
 
 /**
@@ -17,17 +18,17 @@ public class Bishop extends Piece{
 
 	@Override
 	public boolean canMove(Cell destination) {
-		int currentX = currentPosition.getxCord();
-		int currentY = currentPosition.getyCord();
+		int currentX = currentPosition.getRow();
+		int currentY = currentPosition.getCol();
 		
-		int destinationX = destination.getxCord();
-		int destinationY = destination.getyCord();
+		int destinationX = destination.getRow();
+		int destinationY = destination.getCol();
 		
 		int xDiff = Math.abs(currentX - destinationX);
 		int yDiff = Math.abs(currentY - destinationY);
 		
 		// Moves only diagonally
-		return xDiff == yDiff && xDiff>0;
+		return xDiff == yDiff && xDiff > CoreConstants.Integer.ZERO;
 	}
 
 }
